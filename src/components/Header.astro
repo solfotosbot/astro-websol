@@ -1,0 +1,35 @@
+---
+import Logo from "./Logo.astro";
+import SelectLanguage from "./SelectLanguage.astro";
+const pathname = new URL(Astro.request.url).pathname;
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 h-16 bg-white backdrop-blur-md">
+    <div class="px-2 md:px-6 mx-auto py-4 flex justify-between items-center">
+        <a
+            href="/"
+            aria-label="Sol Etchegaray - página inicio"
+            class="flex items-center text-xl text-gray-900 uppercase duration-200"
+        >
+            <Logo />
+            <span class="mb-0.5">Sol Etchegaray</span>
+            <!-- <span class="mb-0.5">S&E</span> -->
+        </a>
+        <nav class="flex gap-9 items-center justify-end text-lg">
+            <a href="/albums"> Galería Fotográfica</a>
+            <a
+                href="/bio"
+                class={`${
+                    pathname === "/bio"
+                        ? "text-yellow-600"
+                        : "" || pathname.includes("/bio")
+                          ? "text-yellow-600"
+                          : ""
+                } text-lg !pr-0`}
+            >
+                Bio</a
+            >
+            <a href="/contact"> Contacto</a>
+        </nav>
+    </div>
+</header>

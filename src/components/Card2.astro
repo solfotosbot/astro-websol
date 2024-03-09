@@ -1,0 +1,25 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  data: any;
+}
+
+const { data } = Astro.props;
+---
+
+<a
+  href={`/albums/${data.AlbumCategory.fields.slug}` + `/${data.slug}`}
+  class="flex justify-center items-end relative h-64 group"
+>
+  <h2 class="text-lg bg-white/80 backdrop-blur-md w-full p-3 text-center font-serif relative z-10 font-medium" style="text-wrap: balance;">
+    {data.title}
+  </h2>
+  <Image
+    src={`https:${data.featuredImg.fields.file.url}?w=620&h=500&fm=png&q=70`}
+    alt={data.title}
+    width={200}
+    height={200}
+    class="w-full duration-300 h-64 opacity-90 group-hover:opacity-70 object-cover absolute inset-0 z-0"
+  />
+</a>

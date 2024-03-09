@@ -1,0 +1,115 @@
+---
+// import { Image } from "astro:assets";
+const { images } = Astro.props;
+---
+
+<div class="w-full z-0 h-screen relative overflow-hidden mx-auto">
+  <div
+    style="--swiper-navigation-color: #333; --swiper-pagination-color: #333; --swiper-pagination-bullet-width: 16px; --swiper-pagination-bullet-height: 16px;"
+    class="!pb-12 swiper"
+  >
+    <div class="swiper-wrapper">
+      {
+        images.map((i: any) => {
+          return (
+            <div class="swiper-slide bg-black ">
+              <img
+                alt=""
+                src={`https:${i.fields.file.url}?w=1200&h=980&fm=png&q=90`}
+                width={400}
+                height={400}
+                class="object-cover w-full h-[90vh]"
+              />
+            </div>
+          );
+        })
+      }
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-left">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        ><path
+          fill="#888888"
+          d="M15.41 7.41L14 6l-6 6l6 6l1.41-1.41L10.83 12l4.58-4.59z"
+        ></path></svg
+      >
+    </div>
+    <div class="swiper-button-right">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        ><path
+          fill="#888888"
+          d="M10 6L8.59 7.41L13.17 12l-4.58 4.59L10 18l6-6l-6-6z"></path></svg
+      >
+    </div>
+  </div>
+</div>
+
+<!-- Initialize Swiper -->
+<script>
+  // @ts-ignore
+  const swiper = new Swiper(".swiper", {
+    lazy: true,
+    spaceBetween: 30,
+    breakpoints: {
+      0: {
+        slidesPerView: 1,
+      },
+      600: {
+        slidesPerView: 1,
+      },
+    },
+    effect: "fade",
+    fadeEffect: {
+      crossFade: true,
+    },
+    loop: true,
+    // autoplay: {
+    //   delay: 2500,
+    //   disableOnInteraction: true,
+    // },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-right",
+      prevEl: ".swiper-button-left",
+    },
+  });
+  console.log(swiper)
+</script>
+
+<style>
+  .swiper {
+    @apply w-full select-none;
+  }
+
+  .swiper-button-left,
+  .swiper-button-right {
+    @apply bg-white w-12 h-12 absolute top-1/2 z-50 flex justify-center duration-300 items-center -translate-y-10;
+  }
+
+  .swiper-button-right {
+    @apply right-0;
+  }
+
+  .swiper-button-left.swiper-button-disabled,
+  .swiper-button-right.swiper-button-disabled {
+    @apply opacity-0;
+  }
+
+  .swiper-button-left.swiper-button-disabled {
+    @apply opacity-30;
+  }
+  .swiper-button-right.swiper-button-disabled {
+    @apply opacity-30;
+  }
+</style>

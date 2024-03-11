@@ -10,7 +10,6 @@ const works = await contentfulClient.getEntries({
 const portfolio = works.items.filter(
     (item: any) => item.fields.AlbumCategory.fields.slug === "marcas"
 );
-console.log(portfolio);
 ---
 
 <Layout title="Trabajos a pedido">

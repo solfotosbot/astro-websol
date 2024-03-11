@@ -1,33 +1,5 @@
 ---
-import { contentfulClient } from "../lib/contentful";
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import Layout from "../layouts/Layout.astro";
-// import { Image } from "astro:assets";
-import CarouselHome from "@/components/CarouselHome.astro";
-import type { EntryFieldTypes } from "contentful";
-
-interface About {
-    contentTypeId: "about";
-    fields: {
-        title: EntryFieldTypes.Text;
-        slug: string;
-        aboutBio: EntryFieldTypes.RichText;
-    };
-}
-
-const entries = await contentfulClient.getEntries<About>({
-    content_type: "about",
-});
-
-const sliders = await contentfulClient.getEntries({ content_type: "sliders" });
-
-const item = entries.items.filter((user) => {
-    return user.fields.slug === "inicio";
-})[0];
-
-const homeSlider = sliders.items.filter((user) => {
-    return user.fields.slug === "inicio";
-})[0];
 ---
 
 <Layout title="Intro">

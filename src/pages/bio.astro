@@ -3,14 +3,12 @@
 import { contentfulClient } from "../lib/contentful";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import Layout from "../layouts/Layout.astro";
-import type { EntryFieldTypes } from "contentful";
-
 
 const entries = await contentfulClient.getEntries({
     content_type: "about",
 });
 
-const item = entries.items.filter((user) => {
+const item = entries.items.filter((user: any) => {
     return user.fields.slug === "inicio";
 })[0];
 ---
@@ -25,7 +23,7 @@ const item = entries.items.filter((user) => {
                         style="text-wrap: balance;"
                         class="text-xl font-serif relative z-10"
                     >
-                        {item.fields.title}.
+                        {item?.fields.title}.
                     </h1>
                     <article
                         class="prose max-w-full mt-12"

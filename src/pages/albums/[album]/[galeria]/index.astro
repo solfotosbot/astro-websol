@@ -42,31 +42,33 @@ const { data } = Astro.props;
 
 <Layout title={data.fields.title}>
     <div
-        class="h-screen overflow-hidden w-full bg-green-200 relative grid grid-cols-2 justify-center items-center mb-12"
+        class="overflow-hidden w-full relative justify-center items-center my-6"
     >
-        <h1
-            style="text-wrap: balance;"
-            class="animate__animated animate__fadeIn text-green-900 max-w-3xl mx-auto text-center z-10 relative mb-12 text-6xl"
-        >
-            {data.fields.title}
-        </h1>
-        <img
+        <div class="w-full max-w-6xl mx-auto">
+            <h1
+                style="text-wrap: balance;"
+                class="animate__animated animate__fadeIn text-green-900 max-w-6xl mx-auto text-left w-full z-10 relative text-2xl"
+            >
+                {data.fields.title}
+            </h1>
+        </div>
+        <!-- <img
             src={`https:${data.fields.featuredImg.fields.file.url}?w=800&fm=webp&q=70`}
             class="opacity-100 z-0 h-screen w-full object-cover"
             alt={data.fields.title}
-        />
+        /> -->
     </div>
     <div class="max-w-6xl mx-auto">
         <div class="grid grid-cols-2 gap-6">
             {
                 data.fields.imagesWorks.map((item: any) => (
-                    <div class="relative">
+                    <div class="relative hover:!opacity-90 duration-300">
                         <img
                             src={`https:${item.fields.file.url}?w=1200&h=1200&fm=webp&q=90`}
                             width="1600"
                             alt={data.fields.title}
                             height="1600"
-                            class="z-10 relative object-cover glightbox w-full animate__animated animate__fadeIn"
+                            class="z-10 relative object-cover cursor-pointer  glightbox w-full animate__animated animate__fadeIn"
                         />
                     </div>
                 ))

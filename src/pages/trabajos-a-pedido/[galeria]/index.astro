@@ -3,17 +3,14 @@
 import Layout from "../../../layouts/Layout.astro";
 import { contentfulClient } from "../../../lib/contentful";
 import slugify from "../../../lib/createSlug";
-import Card from "../../../components/Card.astro";
-import PlaceholderImage from "@/components/ImageLightbox/PlaceholderImage.astro";
 
 export async function getStaticPaths() {
     const allPosts = await contentfulClient.getEntries({
-        content_type: "works",
+        content_type: "worksAPedido",
     });
     return allPosts.items.map((item: any) => {
         return {
             params: {
-                album: slugify(item.fields.AlbumCategory.fields.slug),
                 galeria: slugify(item.fields.slug),
             },
             props: {
@@ -38,6 +35,7 @@ const allCategory = AlbumsCategorias.items.sort(function (a: any, b: any) {
 });
 
 const { data } = Astro.props;
+
 ---
 
 <Layout title={data.fields.title}>
@@ -72,5 +70,5 @@ const { data } = Astro.props;
                 ))
             }
         </div>
-    </div>
+    </div> 
 </Layout>

@@ -1,78 +1,44 @@
 ---
 import { contentfulClient } from "../../lib/contentful";
 import Layout from "../../layouts/Layout.astro";
-import Card2 from "../../components/Card2.astro";
-import slugify from "../../lib/createSlug";
+import { Image } from "astro:assets";
 
 const works = await contentfulClient.getEntries({
-  content_type: "works",
+    content_type: "AlbumsCategorias",
 });
 
-const categories: any = {
-  Autorretratos: [],
-  Bandas: [],
-  Marcas: [],
-  Cuerpas: [],
-};
-
-works.items.forEach((item: any) => {
-  const title = item.fields.AlbumCategory.fields.title;
-  if (title) {
-    if (title.includes("Autorretratos")) {
-      categories.Autorretratos.push(item);
-    }
-    if (title.includes("Bandas") && item.fields.destacar) {
-      categories.Bandas.push(item);
-    }
-    if (title.includes("Marcas") && item.fields.destacar) {
-      categories.Marcas.push(item);
-    }
-    if (title.includes("Cuerpas") && item.fields.destacar) {
-      categories.Cuerpas.push(item);
-    }
-  }
-});
-
-Object.keys(categories).forEach((category) => {
-  categories[category] = categories[category].slice(0, 2);
-});
-
-const albumCategories = [
-  ...new Set(works.items.map((entry) => entry.fields.AlbumCategory)),
-];
-
+const portfolio = works.items.filter(
+    (item: any) => item.fields.slug !== "marcas"
+);
 ---
 
 <Layout title="Intro">
-  <div class="w-full max-w-4xl px-2 md:px-6 mt-12  mx-auto">
-    {
-      albumCategories.map((category: any) => {
-        const items = works.items
-          .filter((item: any) => {
-            const title = item.fields.AlbumCategory.fields.title;
-            return title && title.includes(category.fields.title);
-          })
-          .slice(0, 2); // Limit to the first  2 items
-
-        return (
-          <div class="grid gap-3 mb-20 animate__animated animate__fadeIn">
-            <div class="flex justify-between items-center mb-3">
-              <h2 class="text-3xl">{category.fields.title}</h2>
-              <a
-                class="inline-block ml-3 text-base tracking-wider text-yellow-700 uppercase duration-500 border-b border-yellow-700 md:ml-3"
-                href={`/albums/${slugify(category.fields.slug)}`}
-              >
-                Ver albums
-              </a>
-            </div>
-            <div class="grid grid-cols-2 gap-1">
-              {items.map((item) => (
-                <Card2 data={item.fields} />
-              ))}
-            </div>
-          </div>
-        );
-      })
-    }
-  </div>
+    <div class="grid grid-cols-3 min-h-screen gap-1 max-w-6xl mx-auto mt-12">
+        {
+            portfolio.map((item) => (
+                <div class="h-96 w-full flex justify-center items-center bg-green-100">
+                    <a
+                        href={
+                            `/albums/${item.fields.slug}`
+                        }
+                        class="flex justify-center relative w-full items-center h-96 group overflow-hidden"
+                    >
+                        <h2
+                            class="text-lg absolute inset-0 opacity-0 duration-300 flex justify-center items-center group-hover:opacity-100 bg-black/80 text-white backdrop-blur-md w-full p-3 text-center font-serif z-10 font-medium"
+                            style="text-wrap: balance;"
+                        >
+                            {item.fields.title}
+                        </h2>
+                        <Image
+                            src={`https:${item.fields.featuredImg.fields.file.url}?w=500&fm=webp&q=80`}
+                            alt={item.fields.title}
+                            width={500}
+                            height={500}
+                            class="w-full duration-1000 h-96 group-hover:scale-110 opacity-90 group-hover:opacity-70 object-cover inset-0 z-0"
+                        />
+                    </a>
+                </div>
+            ))
+        }
+    </div>
 </Layout>

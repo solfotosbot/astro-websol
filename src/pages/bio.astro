@@ -5,16 +5,8 @@ import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import Layout from "../layouts/Layout.astro";
 import type { EntryFieldTypes } from "contentful";
 
-interface About {
-    contentTypeId: "about";
-    fields: {
-        title: EntryFieldTypes.Text;
-        slug: string;
-        aboutBio: EntryFieldTypes.RichText;
-    };
-}
 
-const entries = await contentfulClient.getEntries<About>({
+const entries = await contentfulClient.getEntries({
     content_type: "about",
 });
 
@@ -25,18 +17,16 @@ const item = entries.items.filter((user) => {
 
 <Layout title="Biografia">
     <!-- <CarouselHome images={homeSlider?.fields.images} /> -->
-    <div
-        class="grid max-w-4xl mx-auto mt-12 bg-white relative z-20 pt-6 px-2 md:px-6"
-    >
+    <div class="grid max-w-2xl mx-auto mt-12 relative z-20 pt-6 px-2 md:px-6">
         {
             entries && (
-                <div class="bg-white/30 backdrop-blur-lg p-6 ">
-                    <h2
+                <div class="p-6 animate__animated animate__fadeIn">
+                    <h1
                         style="text-wrap: balance;"
-                        class="text-2xl font-serif relative z-10"
+                        class="text-xl font-serif relative z-10"
                     >
                         {item.fields.title}.
-                    </h2>
+                    </h1>
                     <article
                         class="prose max-w-full mt-12"
                         set:html={documentToHtmlString(item.fields.aboutBio)}

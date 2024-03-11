@@ -15,7 +15,7 @@ const { images } = Astro.props;
             <div class="swiper-slide bg-black ">
               <img
                 alt=""
-                src={`https:${i.fields.file.url}?w=1200&h=980&fm=png&q=90`}
+                src={`https:${i.fields.file.url}?w=1200&h=980&fm=webp&q=90`}
                 width={400}
                 height={400}
                 class="object-cover w-full h-[90vh]"
@@ -84,7 +84,6 @@ const { images } = Astro.props;
       prevEl: ".swiper-button-left",
     },
   });
-  console.log(swiper)
 </script>
 
 <style>

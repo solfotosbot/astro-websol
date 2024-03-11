@@ -1,0 +1,49 @@
+---
+import { contentfulClient } from "../../lib/contentful";
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+const works = await contentfulClient.getEntries({
+    content_type: "works",
+});
+
+const portfolio = works.items.filter(
+    (item: any) => item.fields.AlbumCategory.fields.slug === "marcas"
+);
+console.log(portfolio);
+---
+
+<Layout title="Trabajos a pedido">
+    <div class="min-h-screen gap-1 max-w-6xl mx-auto mt-12">
+        <h1 class="text-3xl">Trabajos a pedido</h1>
+        <div class="grid grid-cols-2 gap-12">
+            {
+                portfolio.map((item) => (
+                    <div class="h-96 w-full flex justify-center items-center bg-green-100">
+                        <a
+                            href={
+                                `/albums/${item.fields.slug}` +
+                                `/${item.fields.slug}`
+                            }
+                            class="flex justify-center w-full items-end relative h-96 group overflow-hidden"
+                        >
+                            <h2
+                                class="text-lg absolute inset-0 opacity-0 duration-300 flex justify-center items-center group-hover:opacity-100 bg-black/80 text-white backdrop-blur-md w-full p-3 text-center font-serif z-10 font-medium"
+                                style="text-wrap: balance;"
+                            >
+                                {item.fields.title}
+                            </h2>
+                            <Image
+                                src={`https:${item.fields.featuredImg.fields.file.url}?w=500&fm=webp&q=80`}
+                                alt={item.fields.title}
+                                width={500}
+                                height={500}
+                                class="w-full duration-1000 h-96 group-hover:scale-110 opacity-90 group-hover:opacity-70 object-cover inset-0 z-0"
+                            />
+                        </a>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</Layout>

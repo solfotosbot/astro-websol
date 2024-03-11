@@ -12,11 +12,11 @@ const { data } = Astro.props;
   href={`/albums/${data.AlbumCategory.fields.slug}` + `/${data.slug}`}
   class="flex justify-center items-end relative h-64 group"
 >
-  <h2 class="text-lg bg-gray-100/30 backdrop-blur-md w-full p-3 text-center font-serif relative z-10 font-medium" style="text-wrap: balance;">
+  <h2 class="text-lg bg-gray-900/30 backdrop-blur-md w-full p-3 text-center font-serif relative z-10 font-medium" style="text-wrap: balance;">
     {data.title}
   </h2>
   <Image
-    src={`https:${data.featuredImg.fields.file.url}?w=620&h=500&fm=png&q=70`}
+    src={`https:${data.featuredImg.fields.file.url}?w=620&h=500&fm=webp&q=70`}
     alt={data.title}
     width={200}
     height={200}

@@ -8,9 +8,11 @@ import "glightbox/dist/css/glightbox.min.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import GoogleFont from "./GoogleFont.astro";
+import Offcanvas from "../components/Offcanvas.vue";
+import Navigation from "../components/Navigation.astro";
 
 interface Props {
-  title: string;
+    title: string;
 }
 
 const { title } = Astro.props;
@@ -18,46 +20,45 @@ const { title } = Astro.props;
 
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <meta name="view-transition" content="same-origin" />
-    <GoogleFont/>
-  </head>
-  <body class="pt-12">
-    <Header/>
-    <main class="relative z-10">
-      <slot />
-    </main>
-    <Footer/>
-    <script is:inline src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"
-    ></script>
-    <script>
-      // @ts-ignore
-      import GLightbox from "glightbox";
-      document.addEventListener("DOMContentLoaded", () => {
-        const glightbox = GLightbox({
-          /* options */
-        });
-        console.log(glightbox)
-      });
-    </script>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Astro description" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+        <meta name="view-transition" content="same-origin" />
+        <GoogleFont />
+    </head>
+    <body class="pt-12">
+        <Header />
+        <Offcanvas client:load>
+            <Navigation />
+        </Offcanvas>
+        <main class="relative z-10">
+            <slot />
+        </main>
+        <Footer />
+        <script
+            is:inline
+            src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"
+        ></script>
+        <script>
+            // @ts-ignore
+            import GLightbox from "glightbox";
+            document.addEventListener("DOMContentLoaded", () => {
+                const glightbox = GLightbox({
+                    /* options */
+                });
+            });
+        </script>
+        <style is:global>
+            html {
+                @apply font-serif bg-green-200 text-gray-900;
+            }
+            .gslide-description {
+                @apply hidden;
+            }
+        </style>
+    </body>
 </html>
-
-
-
-<style is:global>
-  html {
-    background: #fff;
-    color: #333;
-    @apply font-serif;
-  }
-  .gslide-description {
-    @apply hidden;
-  }
-</style>

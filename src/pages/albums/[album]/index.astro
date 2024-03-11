@@ -5,49 +5,49 @@ import { contentfulClient } from "../../../lib/contentful";
 import slugify from "../../../lib/createSlug";
 
 export async function getStaticPaths() {
-  const allPosts = await contentfulClient.getEntries({
-    content_type: "works",
-  });
+    const allPosts = await contentfulClient.getEntries({
+        content_type: "works",
+    });
 
-  const allTags = [
-    ...new Set(
-      allPosts.items
-        .map((item: any) => item.fields.AlbumCategory.fields.title)
-        .flat()
-    ),
-  ];
+    const allTags = [
+        ...new Set(
+            allPosts.items
+                .map((item: any) => item.fields.AlbumCategory.fields.title)
+                .flat()
+        ),
+    ];
 
-  return allTags.map((item) => {
-    return {
-      params: { album: slugify(item) },
-      props: {
-        title: item,
-        resourses: allTags,
-      },
-    };
-  });
+    return allTags.map((item) => {
+        return {
+            params: { album: slugify(item) },
+            props: {
+                title: item,
+                resourses: allTags,
+            },
+        };
+    });
 }
 
 const { title } = Astro.props;
 
 const allPosts = await contentfulClient.getEntries({
-  content_type: "works",
+    content_type: "works",
 });
 
 const filterCuerpas = [title];
 
 const tagPosts = allPosts.items.filter((person: any) =>
-  filterCuerpas.every((filter: any) =>
-    person.fields.AlbumCategory.fields.title?.includes(filter)
-  )
+    filterCuerpas.every((filter: any) =>
+        person.fields.AlbumCategory.fields.title?.includes(filter)
+    )
 );
 ---
 
 <Layout title={title}>
-  <div class="max-w-6xl px-2 md:px-6 mt-10 mx-auto">
-    <div class="text-gray-900 text-3xl mb-3">{title}</div>
-    <div class="grid grid-cols-2 gap-6">
-      {tagPosts.map((item: any) => <Card2 data={item.fields} />)}
+    <div class="max-w-6xl px-2 md:px-6 mt-10 mx-auto">
+        <div class="text-gray-900 text-3xl mb-3">{title}</div>
+        <div class="grid grid-cols-2 gap-6">
+            {tagPosts.map((item: any) => <Card2 data={item.fields} />)}
+        </div>
     </div>
-  </div>
 </Layout>

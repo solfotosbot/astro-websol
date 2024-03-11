@@ -5,49 +5,51 @@ import { contentfulClient } from "../../../lib/contentful";
 import slugify from "../../../lib/createSlug";
 
 export async function getStaticPaths() {
-    const allPosts = await contentfulClient.getEntries({
-        content_type: "works",
-    });
+	const allPosts = await contentfulClient.getEntries({
+		content_type: "works",
+	});
 
-    const allTags = [
-        ...new Set(
-            allPosts.items
-                .map((item: any) => item.fields.AlbumCategory.fields.title)
-                .flat()
-        ),
-    ];
+	const allTags = [
+		...new Set(
+			allPosts.items
+				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+				.flatMap((item: any) => item.fields.AlbumCategory.fields.title),
+		),
+	];
 
-    return allTags.map((item) => {
-        return {
-            params: { album: slugify(item) },
-            props: {
-                title: item,
-                resourses: allTags,
-            },
-        };
-    });
+	return allTags.map((item) => {
+		return {
+			params: { album: slugify(item) },
+			props: {
+				title: item,
+				resourses: allTags,
+			},
+		};
+	});
 }
 
 const { title } = Astro.props;
 
 const allPosts = await contentfulClient.getEntries({
-    content_type: "works",
+	content_type: "works",
 });
 
 const filterCuerpas = [title];
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const tagPosts = allPosts.items.filter((person: any) =>
-    filterCuerpas.every((filter: any) =>
-        person.fields.AlbumCategory.fields.title?.includes(filter)
-    )
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	filterCuerpas.every((filter: any) =>
+		person.fields.AlbumCategory.fields.title?.includes(filter),
+	),
 );
 ---
 
 <Layout title={title}>
-    <div class="max-w-6xl px-2 md:px-0 my-6 mx-auto">
-        <h1 class="text-green-900 text-2xl mb-6">{title}</h1>
-        <div class="grid grid-cols-2 gap-6">
-            {tagPosts.map((item: any) => <Card2 data={item.fields} />)}
-        </div>
+  <div class="max-w-7xl px-2 md:px-0 my-6 mx-auto">
+    <h1 class="text-green-900 text-2xl mb-6">{title}</h1>
+    <div class="grid grid-cols-2 gap-6">
+      {tagPosts.map((item: any) => <Card2 data={item.fields} />)}
     </div>
+  </div>
 </Layout>

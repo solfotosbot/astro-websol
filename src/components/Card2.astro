@@ -2,27 +2,28 @@
 import { Image } from "astro:assets";
 
 interface Props {
-    data: any;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  data: any;
 }
 
 const { data } = Astro.props;
 ---
 
 <a
-    href={`/albums/${data.AlbumCategory.fields.slug}` + `/${data.slug}`}
-    class="flex justify-center items-end relative h-96 group overflow-hidden"
+  href={`/albums/${data.AlbumCategory.fields.slug}` + `/${data.slug}`}
+  class="flex justify-center items-end relative h-96 group overflow-hidden"
 >
-    <h2
-        class="text-lg absolute inset-0 opacity-0 duration-300 flex justify-center items-center group-hover:opacity-100 bg-black/10 text-white backdrop-blur-md w-full p-3 text-center font-serif z-10 font-medium"
-        style="text-wrap: balance;"
-    >
-        {data.title}
-    </h2>
-    <Image
-        src={`https:${data.featuredImg.fields.file.url}?w=620&h=500&fm=webp&q=70`}
-        alt={data.title}
-        width={600}
-        height={600}
-        class="w-full duration-1000 h-96 group-hover:scale-110 opacity-90 group-hover:opacity-70 object-cover inset-0 z-0"
-    />
+  <h2
+    class="text-lg inset-0 duration-300 flex justify-center items-center group-hover:opacity-100 bg-black/10 text-white backdrop-blur-md w-full p-3 text-center font-serif z-10 font-medium"
+    style="text-wrap: balance;"
+  >
+    {data.title}
+  </h2>
+  <Image
+    src={`https:${data.featuredImg.fields.file.url}?w=620&h=500&fm=webp&q=70`}
+    alt={data.title}
+    width={600}
+    height={600}
+    class="w-full absolute duration-1000 h-96 group-hover:scale-110 opacity-90 group-hover:opacity-70 object-cover inset-0 z-0"
+  />
 </a>

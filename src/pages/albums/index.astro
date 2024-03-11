@@ -1,52 +1,52 @@
 ---
-import { contentfulClient } from "../../lib/contentful";
-import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import { contentfulClient } from "../../lib/contentful";
 
 const works = await contentfulClient.getEntries({
-    content_type: "AlbumsCategorias",
+	content_type: "AlbumsCategorias",
 });
 
 const portfolio = works.items.filter(
-    (item: any) => item.fields.slug !== "marcas"
+	(item: any) => item.fields.slug !== "marcas",
 );
 ---
 
 <Layout title="Intro">
-    <div
-        class="w-full my-6 max-w-6xl mx-auto"
+  <div class="w-full my-6 max-w-7xl mx-auto">
+    <h1
+      style="text-wrap: balance;"
+      class="animate__animated animate__fadeIn text-green-900 max-w-7xl mx-auto text-left w-full z-10 relative text-2xl"
     >
-        <h1
-            style="text-wrap: balance;"
-            class="animate__animated animate__fadeIn text-green-900 max-w-6xl mx-auto text-left w-full z-10 relative text-2xl"
-        >
-            Portfolio personal
-        </h1>
-    </div>
-    <div class="grid grid-cols-3 min-h-screen gap-1 max-w-6xl mx-auto animate__animated animate__fadeIn">
-        {
-            portfolio.map((item: any) => (
-                <div class="h-96 w-full flex justify-center items-center bg-green-100">
-                    <a
-                        href={`/albums/${item.fields.slug}`}
-                        class="flex justify-center relative w-full items-center h-96 group overflow-hidden"
-                    >
-                        <h2
-                            class="text-lg absolute inset-0 opacity-0 duration-300 flex justify-center items-center group-hover:opacity-100 bg-black/20 text-white backdrop-blur-md w-full p-3 text-center font-serif z-10 font-medium"
-                            style="text-wrap: balance;"
-                        >
-                            {item.fields.title}
-                        </h2>
-                        <Image
-                            src={`https:${item.fields.featuredImg?.fields.file.url}?w=500&fm=webp&q=80`}
-                            alt={item.fields.title}
-                            width={500}
-                            height={500}
-                            class="w-full duration-1000 h-96 group-hover:scale-110 opacity-90 group-hover:opacity-70 object-cover inset-0 z-0"
-                        />
-                    </a>
-                </div>
-            ))
-        }
-    </div>
+      Portfolio personal
+    </h1>
+  </div>
+  <div
+    class="grid grid-cols-3 min-h-screen gap-12 max-w-7xl mx-auto animate__animated animate__fadeIn"
+  >
+    {
+      portfolio.map((item: any) => (
+        <div class="h-96 w-full flex justify-center items-center bg-green-100">
+          <a
+            href={`/albums/${item.fields.slug}`}
+            class="flex justify-center relative w-full items-end h-96 group overflow-hidden"
+          >
+            <h2
+              class="text-lg  duration-300 flex justify-center items-center group-hover:opacity-100 bg-black/20 text-white backdrop-blur-md w-full p-3 text-center font-serif z-10 font-medium"
+              style="text-wrap: balance;"
+            >
+              {item.fields.title}
+            </h2>
+            <Image
+              src={`https:${item.fields.featuredImg?.fields.file.url}?w=500&fm=webp&q=80`}
+              alt={item.fields.title}
+              width={500}
+              height={500}
+              class="w-full absolute duration-1000 h-96 group-hover:scale-110 opacity-90 group-hover:opacity-70 object-cover inset-0 z-0"
+            />
+          </a>
+        </div>
+      ))
+    }
+  </div>
 </Layout>

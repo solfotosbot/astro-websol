@@ -1,40 +1,40 @@
 ---
+import PlaceholderImage from "@/components/ImageLightbox/PlaceholderImage.astro";
+import Card from "../../../../components/Card.astro";
 // import { Image } from "astro:assets";
 import Layout from "../../../../layouts/Layout.astro";
 import { contentfulClient } from "../../../../lib/contentful";
 import slugify from "../../../../lib/createSlug";
-import Card from "../../../../components/Card.astro";
-import PlaceholderImage from "@/components/ImageLightbox/PlaceholderImage.astro";
 
 export async function getStaticPaths() {
-    const allPosts = await contentfulClient.getEntries({
-        content_type: "works",
-    });
-    return allPosts.items.map((item: any) => {
-        return {
-            params: {
-                album: slugify(item.fields.AlbumCategory.fields.slug),
-                galeria: slugify(item.fields.slug),
-            },
-            props: {
-                data: item,
-            },
-        };
-    });
+	const allPosts = await contentfulClient.getEntries({
+		content_type: "works",
+	});
+	return allPosts.items.map((item: any) => {
+		return {
+			params: {
+				album: slugify(item.fields.AlbumCategory.fields.slug),
+				galeria: slugify(item.fields.slug),
+			},
+			props: {
+				data: item,
+			},
+		};
+	});
 }
 
 const AlbumsCategorias = await contentfulClient.getEntries({
-    content_type: "AlbumsCategorias",
+	content_type: "AlbumsCategorias",
 });
 
-const allCategory = AlbumsCategorias.items.sort(function (a: any, b: any) {
-    if (a.fields.slug < b.fields.slug) {
-        return -1;
-    }
-    if (a.fields.slug > b.fields.slug) {
-        return 1;
-    }
-    return 0;
+const allCategory = AlbumsCategorias.items.sort((a: any, b: any) => {
+	if (a.fields.slug < b.fields.slug) {
+		return -1;
+	}
+	if (a.fields.slug > b.fields.slug) {
+		return 1;
+	}
+	return 0;
 });
 
 const { data } = Astro.props;
@@ -44,10 +44,10 @@ const { data } = Astro.props;
     <div
         class="overflow-hidden w-full relative justify-center items-center my-6"
     >
-        <div class="w-full max-w-6xl mx-auto">
+        <div class="w-full max-w-7xl mx-auto">
             <h1
                 style="text-wrap: balance;"
-                class="animate__animated animate__fadeIn text-green-900 max-w-6xl mx-auto text-left w-full z-10 relative text-2xl"
+                class="animate__animated animate__fadeIn text-green-900 max-w-7xl mx-auto text-left w-full z-10 relative text-2xl"
             >
                 {data.fields.title}
             </h1>
@@ -58,7 +58,7 @@ const { data } = Astro.props;
             alt={data.fields.title}
         /> -->
     </div>
-    <div class="max-w-6xl mx-auto">
+    <div class="max-w-7xl mx-auto">
         <div class="grid grid-cols-2 gap-6">
             {
                 data.fields.imagesWorks.map((item: any) => (

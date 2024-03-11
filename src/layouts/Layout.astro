@@ -1,18 +1,18 @@
 ---
+import "@/styles/animate.css";
 // Supports weights 400-900
 import "@/styles/swiper.css";
-import "@/styles/animate.css";
 
 import "@fontsource-variable/playfair-display";
 import "glightbox/dist/css/glightbox.min.css";
-import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import GoogleFont from "./GoogleFont.astro";
-import Offcanvas from "../components/Offcanvas.vue";
+import Header from "../components/Header.astro";
 import Navigation from "../components/Navigation.astro";
+import Offcanvas from "../components/Offcanvas.vue";
+import GoogleFont from "./GoogleFont.astro";
 
 interface Props {
-    title: string;
+	title: string;
 }
 
 const { title } = Astro.props;

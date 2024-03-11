@@ -1,17 +1,15 @@
 ---
-import { contentfulClient } from "../../lib/contentful";
-import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import { contentfulClient } from "../../lib/contentful";
 
 const works = await contentfulClient.getEntries({
-    content_type: "worksAPedido",
+	content_type: "worksAPedido",
 });
-
-
 ---
 
 <Layout title="Trabajos a pedido">
-    <div class="min-h-screen gap-1 max-w-6xl mx-auto mt-12">
+    <div class="min-h-screen gap-1 max-w-7xl mx-auto mt-12">
         <h1 class="text-3xl mb-3">Trabajos a pedido</h1>
         <div class="grid grid-cols-2 gap-12">
             {
@@ -25,7 +23,7 @@ const works = await contentfulClient.getEntries({
                             class="flex justify-center w-full items-end relative h-96 group overflow-hidden"
                         >
                             <h2
-                                class="text-lg absolute inset-0 opacity-0 duration-1000 flex justify-center items-center group-hover:opacity-100 bg-black/20 text-white backdrop-blur-md w-full p-3 text-center font-serif z-10 font-medium"
+                                class="text-lg  duration-1000 flex justify-center items-center group-hover:opacity-100 bg-black/20 text-white backdrop-blur-md w-full p-3 text-center font-serif z-10 font-medium"
                                 style="text-wrap: balance;"
                             >
                                 {item.fields.title}
@@ -35,7 +33,7 @@ const works = await contentfulClient.getEntries({
                                 alt={`${item.fields.title}`}
                                 width={500}
                                 height={500}
-                                class="w-full duration-1000 h-96 group-hover:scale-110 opacity-90 group-hover:opacity-70 object-cover inset-0 z-0"
+                                class="w-full absolute duration-1000 h-96 group-hover:scale-110 opacity-90 group-hover:opacity-70 object-cover inset-0 z-0"
                             />
                         </a>
                     </div>

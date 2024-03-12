@@ -11,8 +11,9 @@ export async function getStaticPaths() {
 
 	const allTags = [
 		...new Set(
-			allPosts.items
-				.flatMap((item: any) => item.fields.AlbumCategory.fields.title),
+			allPosts.items.flatMap(
+				(item: any) => item.fields.AlbumCategory.fields.title,
+			),
 		),
 	];
 

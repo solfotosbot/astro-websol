@@ -4,37 +4,36 @@ import { contentfulClient } from "../../../lib/contentful";
 import slugify from "../../../lib/createSlug";
 
 export async function getStaticPaths() {
-    const allPosts = await contentfulClient.getEntries({
-        content_type: "worksAPedido",
-    });
-    return allPosts.items.map((item: any) => {
-        return {
-            params: {
-                galeria: slugify(item.fields.slug),
-            },
-            props: {
-                data: item,
-            },
-        };
-    });
+	const allPosts = await contentfulClient.getEntries({
+		content_type: "worksAPedido",
+	});
+	return allPosts.items.map((item: any) => {
+		return {
+			params: {
+				galeria: slugify(item.fields.slug),
+			},
+			props: {
+				data: item,
+			},
+		};
+	});
 }
 
 const AlbumsCategorias = await contentfulClient.getEntries({
-    content_type: "AlbumsCategorias",
+	content_type: "AlbumsCategorias",
 });
 
 const allCategory = AlbumsCategorias.items.sort((a: any, b: any) => {
-    if (a.fields.slug < b.fields.slug) {
-        return -1;
-    }
-    if (a.fields.slug > b.fields.slug) {
-        return 1;
-    }
-    return 0;
+	if (a.fields.slug < b.fields.slug) {
+		return -1;
+	}
+	if (a.fields.slug > b.fields.slug) {
+		return 1;
+	}
+	return 0;
 });
 
 const { data } = Astro.props;
-
 ---
 
 <Layout title={data.fields.title}>

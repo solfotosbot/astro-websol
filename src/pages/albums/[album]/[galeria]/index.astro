@@ -35,15 +35,18 @@ const allCategory = AlbumsCategorias.items.sort((a: any, b: any) => {
 });
 
 const { data } = Astro.props;
+console.log(data);
 ---
 
 <Layout title={data.fields.title}>
+  
   <div class="overflow-hidden w-full relative justify-center items-center my-6">
     <div class="w-full max-w-7xl mx-auto">
       <h1
         style="text-wrap: balance;"
         class="animate__animated animate__fadeIn text-green-900 max-w-7xl mx-auto text-left w-full text-5xl relative z-50 h-16"
       >
+       
         {data.fields.title}
       </h1>
     </div>
@@ -53,8 +56,8 @@ const { data } = Astro.props;
             alt={data.fields.title}
         /> -->
   </div>
-  <div class="max-w-full px-3 mx-auto">
-    <div class="gallery grid grid-cols-2 gap-6">
+  <div class="max-w-full md:px-3 mx-auto">
+    <div class="gallery grid grid-cols-2 gap-3 md:gap-6">
       {
         data.fields.imagesWorks.map((item: any) => (
           <div class="relative item   animate__animated animate__fadeIn">
@@ -69,6 +72,26 @@ const { data } = Astro.props;
         ))
       }
     </div>
+    {
+      data.fields.imagesWorksSecond && (
+        <div class="mt-12">
+          <h2 class="mb-3 text-2xl max-w-7xl mx-auto md:text-4xl">Sesión 2</h2>
+          <div class="gallery grid grid-cols-2 gap-3 md:gap-6">
+            {data.fields.imagesWorksSecond.map((item: any) => (
+              <div class="relative item   animate__animated animate__fadeIn">
+                <img
+                  src={`https:${item.fields.file.url}?w=1200&h=1200&fm=webp&q=90`}
+                  width="1600"
+                  alt={data.fields.title}
+                  height="1600"
+                  class="z-10 relative object-cover cursor-pointer hover:!opacity-90 duration-300 glightbox w-full"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    }
   </div>
 </Layout>
 

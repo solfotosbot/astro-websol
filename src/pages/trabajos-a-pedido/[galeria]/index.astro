@@ -38,12 +38,12 @@ const { data } = Astro.props;
 
 <Layout title={data.fields.title}>
     <div
-        class="h-screen overflow-hidden w-full bg-green-200 relative grid grid-cols-2 gap-6 justify-center items-center mb-12"
+        class="md:h-screen overflow-hidden w-full bg-green-200 relative grid grid-cols-2 gap-6 justify-center items-center md:mb-12"
     >
-        <div class="pl-4">
+        <div class="md:pl-4">
             <h1
                 style="text-wrap: balance;"
-                class="animate__animated animate__fadeIn text-green-900 max-w-3xl mx-auto text-left z-10 relative mb-12 text-7xl"
+                class="animate__animated animate__fadeIn text-green-900 max-w-3xl mx-auto text-left z-10 relative my-3 md:mt-0 md:mb-12 text-4xl md:text-7xl"
             >
                 {data.fields.title}
             </h1>
@@ -54,12 +54,12 @@ const { data } = Astro.props;
         </div>
         <img
             src={`https:${data.fields.featuredImg.fields.file.url}?w=800&fm=webp&q=70`}
-            class="opacity-100 z-0 h-screen w-full object-cover"
+            class="opacity-100 md:flex hidden z-0 h-screen w-full object-cover"
             alt={data.fields.title}
         />
     </div>
     <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-2 gap-6">
+        <div class="grid grid-cols-2 gap-3 md:gap-6">
             {
                 data.fields.imagesWorks.map((item: any) => (
                     <div class="relative">

@@ -46,7 +46,7 @@
     >
       <div
         v-if="!show"
-        class="OffcanvasNav border-l-2 border-gray-800/1  0  fixed right-0 text-right shadow-lg font-sans space-y-12 top-0 bottom-0 bg-white duration-700 w-64 p-3 z-[60] flex justify-start pt-2 flex-col"
+        class="OffcanvasNav border-l-2 border-green-800/10 fixed right-0 text-right shadow-lg font-sans space-y-12 top-0 bottom-0 bg-white duration-700 w-52 p-6 z-[60] flex justify-start pt-2 flex-col"
       >
         <slot />
       </div>

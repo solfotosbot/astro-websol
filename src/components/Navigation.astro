@@ -1,77 +1,84 @@
 ---
 const pathname = new URL(Astro.request.url).pathname;
 import NavigationTrabajos from "./NavigationTrabajos.vue";
+import { mainnav } from "../lib/nav.json";
+const { links } = mainnav;
 ---
 
-<nav class="flex gap-6 items-center justify-end">
-  <a
-    href="/bio"
-    class={`${
-      pathname === "/bio"
-        ? "active"
-        : "" || pathname.includes("/bio")
-          ? "active"
-          : ""
-    }`}
-  >
-    Bio
-  </a>
-  <a
-    href="/albums"
-    class={` ${
-      pathname === "/albums"
-        ? "active"
-        : "" || pathname.includes("/albums")
-          ? "active"
-          : ""
-    }`}
-    >Portfolio personal
-  </a>
-
-  <a
-    href="/trabajos-a-pedido"
-    class={`${
-      pathname === "/trabajos-a-pedido"
-        ? "active"
-        : "" || pathname.includes("/trabajos-a-pedido")
-          ? "active"
-          : ""
-    }`}
-  >
-    Trabajos a pedido
-  </a>
-  <!-- <div class="hidden md:inline-flex">
-        <NavigationTrabajos client:load/>
-    </div> -->
-  <a
-    href="/shop"
-    class={`${
-      pathname === "/shop"
-        ? "active"
-        : "" || pathname.includes("/shop")
-          ? "active"
-          : ""
-    }`}
-  >
-    Print/shop
-  </a>
-  <a
-    href="/contact"
-    class={`${
-      pathname === "/contact"
-        ? "active"
-        : "" || pathname.includes("/contact")
-          ? "active"
-          : ""
-    }`}
-  >
-    Contacto
-  </a>
+<nav class="flex gap-6 md:items-center justify-end">
+  {
+    links.map(({ name, url, highlights }) => {
+      return (
+        <div class="group">
+          <a
+            href={url}
+            title={`Visitar ${name}`}
+            class={`${
+              pathname === url
+                ? "active"
+                : "" || pathname.includes(url)
+                  ? "active"
+                  : ""
+            }`}
+          >
+            {name}
+          </a>
+          {highlights && (
+            <div class="hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible duration-300 md:flex flex-col absolute top-12 bg-green-100/95 backdrop-blur-sm gap-1 w-64 py-3 px-6 shadow-lg -translate-x-32">
+              {highlights.map(({ name, url }) => {
+                return (
+                  <a
+                    href={url}
+                    title={`Visitar ${name}`}
+                    class={`hover:underline underline-offset-2 !py-1.5 w-full ${
+                      pathname === url
+                        ? "sub-active"
+                        : "" || pathname.includes(url)
+                          ? "sub-active"
+                          : ""
+                    }`}
+                  >
+                    {name}
+                  </a>
+                );
+              })}
+            </div>
+          )}
+          
+          {highlights && (
+            <div class="md:hidden flex flex-col mt-3 mb-3 pr-3 border-r-2">
+              {highlights.map(({ name, url }) => {
+                return (
+                  <a
+                    href={url}
+                    title={`Visitar ${name}`}
+                    class={`hover:underline underline-offset-2 !py-1.5 w-full ${
+                      pathname === url
+                        ? "sub-active"
+                        : "" || pathname.includes(url)
+                          ? "sub-active"
+                          : ""
+                    }`}
+                  >
+                    {name}
+                  </a>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      );
+    })
+  }
 </nav>
 
 <style>
   nav a {
     @apply border-b-4 border-transparent py-2.5;
+  }
+
+  nav a.active {
+    @apply border-green-900;
   }
 
   nav a.active {

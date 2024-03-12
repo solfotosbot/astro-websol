@@ -1,8 +1,6 @@
 ---
 import "@/styles/animate.css";
-// Supports weights 400-900
 import "@/styles/swiper.css";
-
 import "@fontsource-variable/playfair-display";
 import "glightbox/dist/css/glightbox.min.css";
 import Footer from "../components/Footer.astro";
@@ -31,13 +29,19 @@ const { title } = Astro.props;
     <GoogleFont />
   </head>
   <body class="pt-12">
+    <div class="cursor-wrapper">
+      <div class="custom-cursor custom-cursor__outer">
+        <div class="custom-cursor custom-cursor__inner"></div>
+      </div>
+    </div>
     <Header />
     <Offcanvas client:load>
       <Navigation />
     </Offcanvas>
-    <main class="relative z-10">
+    <main class="relative z-10 px-2 md:px-0">
       <slot />
     </main>
+
     <Footer />
     <script
       is:inline
@@ -59,6 +63,33 @@ const { title } = Astro.props;
       .gslide-description {
         @apply hidden;
       }
+
+      body {
+        --sb-track-color: #bbf7d0;
+        --sb-thumb-color: #14532d;
+        --sb-size: 10px;
+      }
+
+      body::-webkit-scrollbar {
+        width: var(--sb-size);
+      }
+
+      body::-webkit-scrollbar-track {
+        background: var(--sb-track-color);
+        border-radius: 10px;
+      }
+
+      body::-webkit-scrollbar-thumb {
+        background: var(--sb-thumb-color);
+        border-radius: 10px;
+      }
+
+      @supports not selector(::-webkit-scrollbar) {
+        body {
+          scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+        }
+      }
     </style>
+    
   </body>
 </html>

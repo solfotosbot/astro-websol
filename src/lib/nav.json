@@ -1,0 +1,31 @@
+{
+  "mainnav": {
+    "links": [
+      {
+        "name": "Bio",
+        "url": "/bio"
+      },
+      {
+        "name": "Portfolio personal",
+        "url": "/albums",
+        "highlights": [
+          { "name": "Autoretratos", "url": "/albums/autorretratos" },
+          { "name": "Bandas", "url": "/albums/bandas" },
+          { "name": "Cuerpas", "url": "/albums/cuerpas" }
+        ]
+      },
+      {
+        "name": "Trabajos a pedido",
+        "url": "/trabajos-a-pedido"
+      },
+      {
+        "name": "Print Shop",
+        "url": "/shop"
+      },
+      {
+        "name": "Contacto",
+        "url": "/contact"
+      }
+    ]
+  }
+}

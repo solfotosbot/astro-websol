@@ -1,78 +1,100 @@
 ---
-import PlaceholderImage from "@/components/ImageLightbox/PlaceholderImage.astro";
-import Card from "../../../../components/Card.astro";
-// import { Image } from "astro:assets";
 import Layout from "../../../../layouts/Layout.astro";
 import { contentfulClient } from "../../../../lib/contentful";
 import slugify from "../../../../lib/createSlug";
 
 export async function getStaticPaths() {
-	const allPosts = await contentfulClient.getEntries({
-		content_type: "works",
-	});
-	return allPosts.items.map((item: any) => {
-		return {
-			params: {
-				album: slugify(item.fields.AlbumCategory.fields.slug),
-				galeria: slugify(item.fields.slug),
-			},
-			props: {
-				data: item,
-			},
-		};
-	});
+  const allPosts = await contentfulClient.getEntries({
+    content_type: "works",
+  });
+  return allPosts.items.map((item: any) => {
+    return {
+      params: {
+        album: slugify(item.fields.AlbumCategory.fields.slug),
+        galeria: slugify(item.fields.slug),
+      },
+      props: {
+        data: item,
+      },
+    };
+  });
 }
 
 const AlbumsCategorias = await contentfulClient.getEntries({
-	content_type: "AlbumsCategorias",
+  content_type: "AlbumsCategorias",
 });
 
 const allCategory = AlbumsCategorias.items.sort((a: any, b: any) => {
-	if (a.fields.slug < b.fields.slug) {
-		return -1;
-	}
-	if (a.fields.slug > b.fields.slug) {
-		return 1;
-	}
-	return 0;
+  if (a.fields.slug < b.fields.slug) {
+    return -1;
+  }
+  if (a.fields.slug > b.fields.slug) {
+    return 1;
+  }
+  return 0;
 });
 
 const { data } = Astro.props;
 ---
 
 <Layout title={data.fields.title}>
-    <div
-        class="overflow-hidden w-full relative justify-center items-center my-6"
-    >
-        <div class="w-full max-w-7xl mx-auto">
-            <h1
-                style="text-wrap: balance;"
-                class="animate__animated animate__fadeIn text-green-900 max-w-7xl mx-auto text-left w-full z-10 relative text-5xl"
-            >
-                {data.fields.title}
-            </h1>
-        </div>
-        <!-- <img
+  <div class="overflow-hidden w-full relative justify-center items-center my-6">
+    <div class="w-full max-w-7xl mx-auto">
+      <h1
+        style="text-wrap: balance;"
+        class="animate__animated animate__fadeIn text-green-900 max-w-7xl mx-auto text-left w-full text-5xl relative z-50 h-16"
+      >
+        {data.fields.title}
+      </h1>
+    </div>
+    <!-- <img
             src={`https:${data.fields.featuredImg.fields.file.url}?w=800&fm=webp&q=70`}
             class="opacity-100 z-0 h-screen w-full object-cover"
             alt={data.fields.title}
         /> -->
+  </div>
+  <div class="max-w-full px-3 mx-auto">
+    <div class="gallery grid grid-cols-2 gap-6">
+      {
+        data.fields.imagesWorks.map((item: any) => (
+          <div class="relative item   animate__animated animate__fadeIn">
+            <img
+              src={`https:${item.fields.file.url}?w=1200&h=1200&fm=webp&q=90`}
+              width="1600"
+              alt={data.fields.title}
+              height="1600"
+              class="z-10 relative object-cover cursor-pointer hover:!opacity-90 duration-300 glightbox w-full"
+            />
+          </div>
+        ))
+      }
     </div>
-    <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-2 gap-6">
-            {
-                data.fields.imagesWorks.map((item: any) => (
-                    <div class="relative hover:!opacity-90 duration-300">
-                        <img
-                            src={`https:${item.fields.file.url}?w=1200&h=1200&fm=webp&q=90`}
-                            width="1600"
-                            alt={data.fields.title}
-                            height="1600"
-                            class="z-10 relative object-cover cursor-pointer  glightbox w-full animate__animated animate__fadeIn"
-                        />
-                    </div>
-                ))
-            }
-        </div>
-    </div>
+  </div>
 </Layout>
+
+<style>
+  .gallery .item:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .gallery .item:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .gallery .item:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .gallery .item:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+  .gallery .item:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+  .gallery .item:nth-child(6) {
+    animation-delay: 0.6s;
+  }
+  .gallery .item:nth-child(7) {
+    animation-delay: 0.7s;
+  }
+  .gallery .item:nth-child(8) {
+    animation-delay: 0.8s;
+  }
+</style>

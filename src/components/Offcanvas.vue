@@ -20,7 +20,7 @@
       class="fixed justify-center items-center p-1  font-bold text-gray-900 right-2 z-[60] flex top-1 gap-2"
       @click="show = !show"
     >
-      <span>Menú</span>
+      <span class="sr-only">Menú</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -46,7 +46,7 @@
     >
       <div
         v-if="!show"
-        class="OffcanvasNav border-l-2 border-gray-800/1  0  fixed right-0 text-center shadow-lg font-sans space-y-12 top-0 bottom-0 bg-white duration-700 w-64 p-3 z-[60] flex justify-start pt-2 flex-col"
+        class="OffcanvasNav border-l-2 border-gray-800/1  0  fixed right-0 text-right shadow-lg font-sans space-y-12 top-0 bottom-0 bg-white duration-700 w-64 p-3 z-[60] flex justify-start pt-2 flex-col"
       >
         <slot />
       </div>

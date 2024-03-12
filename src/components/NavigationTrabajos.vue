@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import {
-	HoverCardArrow,
-	HoverCardContent,
-	HoverCardPortal,
-	HoverCardRoot,
-	HoverCardTrigger,
+  HoverCardArrow,
+  HoverCardContent,
+  HoverCardPortal,
+  HoverCardRoot,
+  HoverCardTrigger,
 } from "radix-vue";
 import { ref } from "vue";
 

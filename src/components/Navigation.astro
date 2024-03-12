@@ -1,6 +1,5 @@
 ---
 const pathname = new URL(Astro.request.url).pathname;
-import NavigationTrabajos from "./NavigationTrabajos.vue";
 import { mainnav } from "../lib/nav.json";
 const { links } = mainnav;
 ---
@@ -44,7 +43,7 @@ const { links } = mainnav;
               })}
             </div>
           )}
-          
+
           {highlights && (
             <div class="md:hidden flex flex-col mt-3 mb-3 pr-3 border-r-2">
               {highlights.map(({ name, url }) => {

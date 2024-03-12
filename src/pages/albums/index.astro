@@ -10,6 +10,19 @@ const works = await contentfulClient.getEntries({
 const portfolio = works.items.filter(
 	(item: any) => item.fields.slug !== "marcas",
 );
+
+const sorted = portfolio.sort((a: any, b: any) => {
+	const slugA = a.fields.slug.toLowerCase();
+	const slugB = b.fields.slug.toLowerCase();
+
+	if (slugA < slugB) {
+		return -1;
+	}
+	if (slugA > slugB) {
+		return 1;
+	}
+	return 0;
+});
 ---
 
 <Layout title="Intro">
@@ -22,10 +35,10 @@ const portfolio = works.items.filter(
     </h1>
   </div>
   <div
-    class="grid  md:grid-cols-3 min-h-screen gap-12 max-w-7xl mx-auto animate__animated animate__fadeIn"
+    class="grid md:grid-cols-3 min-h-screen gap-12 max-w-7xl mx-auto animate__animated animate__fadeIn"
   >
     {
-      portfolio.map((item: any) => (
+      sorted.map((item: any) => (
         <div class="h-96 w-full flex justify-center items-center bg-green-100">
           <a
             href={`/albums/${item.fields.slug}`}

@@ -1,5 +1,5 @@
 ---
-import Card2 from "../../../components/Card2.astro";
+import CardAlbum from "../../../components/CardAlbum.astro";
 import Layout from "../../../layouts/Layout.astro";
 import { contentfulClient } from "../../../lib/contentful";
 import slugify from "../../../lib/createSlug";
@@ -47,7 +47,7 @@ const tagPosts = allPosts.items.filter((person: any) =>
   <div class="max-w-7xl px-2 md:px-0 my-6 mx-auto">
     <h1 class="text-green-900 text-2xl mb-6">{title}</h1>
     <div class="grid sm:grid-cols-2 gap-3 md:gap-6">
-      {tagPosts.map((item: any) => <Card2 data={item.fields} />)}
+      {tagPosts.map((item: any) => <CardAlbum data={item.fields} />)}
     </div>
   </div>
 </Layout>

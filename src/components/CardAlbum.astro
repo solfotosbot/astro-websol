@@ -10,7 +10,7 @@ const { data } = Astro.props;
 
 <a
     href={`/albums/${data.AlbumCategory.fields.slug}` + `/${data.slug}`}
-    class="flex justify-center items-end relative h-96 group overflow-hidden"
+    class="flex justify-center items-end relative h-96 group overflow-hidden animate__animated animate__fadeIn item"
 >
     <h2
         class="text-lg inset-0 duration-300 flex justify-center items-center group-hover:opacity-100 bg-black/10 text-white backdrop-blur-md w-full p-3 text-center font-serif z-10 font-medium"

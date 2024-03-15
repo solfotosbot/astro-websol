@@ -53,16 +53,16 @@ const { data } = Astro.props;
             /> -->
         </div>
         <img
-            src={`https:${data.fields.featuredImg.fields.file.url}?w=800&fm=webp&q=70`}
+            src={`https:${data.fields.featuredImg.fields.file.url}?h=800&fm=webp&q=95`}
             class="opacity-100 md:flex hidden z-0 h-screen w-full object-cover"
             alt={data.fields.title}
         />
     </div>
     <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-2 gap-3 md:gap-6">
+        <div class="columns-2">
             {
                 data.fields.imagesWorks.map((item: any) => (
-                    <div class="relative">
+                    <div class="relative mb-4">
                         <img
                             src={`https:${item.fields.file.url}?w=1200&h=1200&fm=webp&q=90`}
                             width="1600"

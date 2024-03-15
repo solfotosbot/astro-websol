@@ -59,10 +59,10 @@ const { data } = Astro.props;
         />
     </div>
     <div class="max-w-7xl mx-auto">
-        <div class="columns-2">
+        <div class="grid grid-cols-2 gap-4">
             {
                 data.fields.imagesWorks.map((item: any) => (
-                    <div class="relative mb-4">
+                    <div class="relative">
                         <img
                             src={`https:${item.fields.file.url}?w=1200&h=1200&fm=webp&q=90`}
                             width="1600"

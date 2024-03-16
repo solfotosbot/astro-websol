@@ -64,6 +64,77 @@ const {
         });
       });
     </script>
+     <script>
+      const show_alert = "1";
+
+      document.addEventListener('contextmenu', event => {
+        if (show_alert) {
+            alert('El boton derecho está desabilitado.');
+        }
+        event.preventDefault()
+      });
+      document.onkeydown = function (e) {
+        // disable F12 key
+        if(e.keyCode == 123) {
+          return false;
+        }
+        var ctrlOrMeta = e.ctrlKey || e.metaKey;
+
+        // disable I key
+        if(ctrlOrMeta && e.shiftKey && e.keyCode == 73){
+          return false;
+        }
+
+        // disable J key
+        if(ctrlOrMeta && e.shiftKey && e.keyCode == 74) {
+          return false;
+        }
+
+        // disable P key
+        if(ctrlOrMeta && e.keyCode == 80) {
+          return false;
+        }
+
+        // disable S key
+        if(ctrlOrMeta && e.keyCode == 83) {
+          return false;
+        }
+
+        // disable U key
+        if(ctrlOrMeta && e.keyCode == 85) {
+          return false;
+        }
+
+        // disable D key
+        if((ctrlOrMeta && e.keyCode == 68) || (e.altKey && e.keyCode == 68)) {
+          return false;
+        }
+
+        // disable F key
+        if(ctrlOrMeta && e.keyCode == 70) {
+          return false;
+        }
+
+        // disable G key
+        if(ctrlOrMeta && e.keyCode == 71) {
+          return false;
+        }
+
+        // disable F3 key
+        if (e.keyCode == 114) {
+            return false;
+        }
+
+        // disable shift + F3 key
+        if (e.shiftKey && e.keyCode == 114) {
+            return false;
+        }
+
+        if(ctrlOrMeta && e.shiftKey && e.keyCode == 71) {
+            return false;
+        }
+      }
+    </script>
     <style is:global>
       html {
         @apply font-serif bg-green-200 text-gray-900;
